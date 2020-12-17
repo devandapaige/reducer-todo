@@ -1,43 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default class TodoForm extends React.Component {
-  //CCR
-  constructor() {
-    super();
-    this.state = {
-      newItem: "",
-    };
-  }
+const TodoForm = ({ dispatch }) => {
+  const [todo, setTodo] = useState("");
 
-  handleChanges = (event) => {
-    this.setState({
-      newItem: event.target.value,
+  const handleChanges = (event) => {
+    setTodo(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch({
+      type: "ADD_TODO",
+      payload: todo,
+    });
+    setTodo("");
+  };
+  const handleClear = (event) => {
+    event.preventDefault();
+    dispatch({
+      type: "CLEAR_COMPLETED",
     });
   };
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.handleAddItem(this.state.newItem);
-    this.setState({ newItem: "" });
-  };
-  handleClear = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.props.clearItems();
-  };
-  render() {
-    return (
-      <div>
-        <form className="addForm" onSubmit={this.handleSubmit}>
-          <input
-            placeholder="To-Do..."
-            onChange={this.handleChanges}
-            value={this.state.newItem}
-          />
-          <button className="addNew">Add</button>
-          <br />
-        </form>
-          <button className="clear" onClick={this.handleClear}>Clear Completed</button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form className="addForm" onSubmit={handleSubmit}>
+        <input placeholder="To-Do..." onChange={handleChanges} value={todo} />
+        <button className="addNew">Add</button>
+        <br />
+      </form>
+      <button className="clear" onClick={handleClear}>
+        Clear Completed
+      </button>
+    </div>
+  );
+};
+
+export default TodoForm;
