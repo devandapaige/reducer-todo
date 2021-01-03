@@ -1,4 +1,6 @@
-export const todo = [
+import redux from "redux";
+
+const todo = [
   {
     todo: "example: Do Laundry",
     id: 1528817077286,
@@ -11,20 +13,21 @@ export const todo = [
   },
 ];
 
-export default const reducer = (state, action) => {
-    switch(action.type) {
-        case "ADD_TODO":
-            return [
-                ...state,
-                {
-                    todo: action.payload,
-                    id: Date.now(),
-                    completed: false,
-                }
-            ]
-            case "TOGGLE_COMPLETE":
-                return state.map(todo => {
-                    
-                })
-    }
-}
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "ADD_TODO":
+      return [
+        ...state,
+        {
+          todo: action.payload,
+          id: Date.now(),
+          completed: false,
+        },
+      ];
+    case "TOGGLE_COMPLETE":
+      return state.map((todo) => {});
+    default:
+      return state;
+  }
+};
+export default { reducer, todo };
