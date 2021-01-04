@@ -8,7 +8,7 @@ const Todo = (props) => {
         props.dispatch({ type: "TOGGLE_COMPLETE", id: props.item.id })
       }
     >
-      <p>☐ {props.item.task}</p>
+      <p>☐ {props.item.item}</p>
     </div>
   );
 };

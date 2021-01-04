@@ -1,14 +1,12 @@
-import redux from "redux";
-
 const initialState = {
   todoList: [
     {
-      todo: "example: Do Laundry",
+      item: "example: Do Laundry",
       id: 1528817077286,
       completed: true,
     },
     {
-      todo: "example: empty dishwasher",
+      item: "example: empty dishwasher",
       id: 1528817084358,
       completed: true,
     },
@@ -35,4 +33,4 @@ const reducer = (state, action) => {
       return state;
   }
 };
-export default { reducer, initialState };
+export { reducer, initialState };

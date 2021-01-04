@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import { reducer, initialState } from "../reducers/Reducer";
 import Todo from "./Todo";
 
 function TodoForm() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer( reducer, initialState );
   const [currentValue, setCurrentValue] = useState("");
   const handleChange = (e) => {
     setCurrentValue(e.target.value);
@@ -24,11 +24,6 @@ function TodoForm() {
 
   return (
     <div>
-      <div className="todoList">
-        {state.todoList.map((item) => {
-          return <Todo dispatch={dispatch} key={item.id} item={task} />;
-        })}
-      </div>
       <form onSubmit={handleSubmit}>
         <input type="text" value={currentValue} onChange={handleChange} />
         <button type="submit">+</button>
@@ -36,6 +31,11 @@ function TodoForm() {
           Clear Completed
         </button>
       </form>
+      <div className="todoList">
+        {state.todoList.map((item) => {
+          return <Todo dispatch={dispatch} key={item.id} item={item} />;
+        })}
+      </div>
     </div>
   );
 }
